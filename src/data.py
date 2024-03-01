@@ -36,13 +36,7 @@ def get_data_loaders(
     mean, std = compute_mean_and_std()
     print(f"Dataset mean: {mean}, std: {std}")
 
-    # YOUR CODE HERE:
-    # create 3 sets of data transforms: one for the training dataset,
-    # containing data augmentation, one for the validation dataset
-    # (without data augmentation) and one for the test set (again
-    # without augmentation)
-    # HINT: resize the image to 256 first, then crop them to 224, then add the
-    # appropriate transforms for that step
+
     data_transforms = {
         "train": transforms.Compose([
             # YOUR CODE HERE
@@ -79,16 +73,14 @@ def get_data_loaders(
     # Create train and validation datasets
     train_data = datasets.ImageFolder(
         base_path / "train",
-        # YOUR CODE HERE: add the appropriate transform that you defined in
-        # the data_transforms dictionary
+
         transform=data_transforms["train"]
     )
     # The validation dataset is a split from the train_one_epoch dataset, so we read
     # from the same folder, but we apply the transforms for validation
     valid_data = datasets.ImageFolder(
         base_path / "train",
-        # YOUR CODE HERE: add the appropriate transform that you defined in
-        # the data_transforms dictionary
+
         transform=data_transforms["valid"]
     )
 
@@ -127,7 +119,7 @@ def get_data_loaders(
     # Now create the test data loader
     test_data = datasets.ImageFolder(
         base_path / "test",
-        # YOUR CODE HERE (add the test transform)
+
         transform=data_transforms["test"]
     )
 
@@ -138,7 +130,7 @@ def get_data_loaders(
         test_sampler = None
 
     data_loaders["test"] = torch.utils.data.DataLoader(
-        # YOUR CODE HERE (remember to add shuffle=False as well)
+
         test_data,
         batch_size=batch_size,
         sampler=test_sampler,
@@ -158,8 +150,7 @@ def visualize_one_batch(data_loaders, max_n: int = 5):
     :return: None
     """
 
-    # YOUR CODE HERE:
-    # obtain one batch of training images
+
     # First obtain an iterator from the train dataloader
     dataiter = iter(data_loaders['train'])
     # Then call the .next() method on the iterator you just
@@ -177,7 +168,7 @@ def visualize_one_batch(data_loaders, max_n: int = 5):
 
     images = invTrans(images)
 
-    # YOUR CODE HERE:
+
     # Get class names from the train data loader
     class_names = data_loaders['train'].dataset.classes
 
