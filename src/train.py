@@ -14,7 +14,6 @@ def train_one_epoch(train_dataloader, model, optimizer, loss):
     """
 
     if torch.cuda.is_available():
-        # HINT: use .cuda()
         model = model.cuda()
 
     model.train()
